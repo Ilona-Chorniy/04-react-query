@@ -11,13 +11,13 @@ interface FetchMoviesResponse {
   total_results: number;
 }
 
-export async function fetchMovies(query: string): Promise<Movie[]> {
+export async function fetchMovies(query: string,  page: number): Promise<FetchMoviesResponse>  {
   const response = await axios.get<FetchMoviesResponse>(BASE_URL, {
-    params: { query },
+    params: { query, page },
     headers: {
       Authorization: `Bearer ${API_KEY}`,
     },
   });
   
-  return response.data.results;
+  return response.data;
 }
